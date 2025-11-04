@@ -153,3 +153,31 @@ th {
     to { opacity: 1; transform: scale(1); }
 }
 
+.btn {
+    display: inline-block;
+    padding: 6px 14px;
+    margin: 2px;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.edit-btn {
+    background-color: #4CAF50; 
+}
+
+.edit-btn:hover {
+    background-color: #45a049;
+}
+
+.delete-btn {
+    background-color: #f44336;
+}
+
+.delete-btn:hover {
+    background-color: #da190b;
+}

@@ -1,5 +1,6 @@
 <?php 
 session_start();
+#since database is created at config folder include the db.php instead of putting the whole database connection code 
 include 'config/db.php';
 
 $message = $_SESSION['message'] ?? "";
@@ -20,6 +21,7 @@ if (isset($_POST["submit"])) {
         $showPopup = true;
         header("Location: " . $_SERVER['PHP_SELF']);
         exit();
+    #!preg_match is the one who checks the validation if the contact is numeric and if the contact is exactly 11 or 12 characters if you want to change it and only check for numeric use this (!is_numeric($contact))
     } elseif (!preg_match('/^\d{11,12}$/', $contact)) {
         $_SESSION['message'] = "
         <p>Contact must be a number and must be 11 or 12 digits only!</p>
@@ -40,7 +42,7 @@ if (isset($_POST["submit"])) {
             $stmt->bindParam(':contact', $contact);
             $stmt->execute();
 
-            $_SESSION['message'] = "<h3>Product added successfully!</h3>
+            $_SESSION['message'] = "<h3>Student added successfully!</h3>
             <img src='https://tiermaker.com/images/template_images/2022/782255/all-genshin-impact-emotes-stickers-40-782255/110praise.png'
                 alt='IMG' width='250'>";
             $_SESSION['popupType'] = "success";
@@ -70,12 +72,12 @@ try {
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Student Record Page</title>
+    <title>Student Insert Page</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div class="background-overlay"></div>
-<h2>Student Record</h2>
+<h2>Student Insert</h2>
 <div class="form-container">
     <form method="POST">
         <label>Student_No:</label>
@@ -103,40 +105,12 @@ try {
         <button type="submit" name="submit">Add Student</button>
     </form>
 </div>
-
-<h2>List of Students</h2>
-<?php if (count($students) > 0): ?>
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Student_Number</th>
-        <th>Fullname</th>
-        <th>Branch</th>
-        <th>Email</th>
-        <th>Contact</th>
-    </tr>
-    <?php foreach ($students as $row): ?>
-    <tr>
-        <td><?php echo $row['id']; ?></td>
-        <td><?php echo htmlspecialchars($row['student_no']); ?></td>
-        <td><?php echo htmlspecialchars($row['fullname']); ?></td>
-        <td><?php echo htmlspecialchars($row['branch']); ?></td>
-        <td><?php echo htmlspecialchars($row['email']); ?></td>
-        <td><?php echo $row['contact']; ?></td>
-    </tr>
-    <?php endforeach; ?>
-</table>
-<?php else: ?>
-<p style="text-align:center;">No student records found.</p>
-<?php endif; ?>
-
 <div class="overlay" id="popupOverlay">
     <div class="popup <?php echo $popupType; ?>">
         <?php echo $message; ?>
         <button class="close-btn" onclick="closePopup()">Close</button>
     </div>
 </div>
-
 <script>
 function closePopup() {
     document.getElementById("popupOverlay").style.display = "none";
