@@ -104,38 +104,6 @@ try {
     </form>
 </div>
 
-<h2>List of Students</h2>
-<?php if (count($students) > 0): ?>
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Student_Number</th>
-        <th>Fullname</th>
-        <th>Branch</th>
-        <th>Email</th>
-        <th>Contact</th>
-    </tr>
-    <?php foreach ($students as $row): ?>
-    <tr>
-        <td><?php echo $row['id']; ?></td>
-        <td><?php echo htmlspecialchars($row['student_no']); ?></td>
-        <td><?php echo htmlspecialchars($row['fullname']); ?></td>
-        <td><?php echo htmlspecialchars($row['branch']); ?></td>
-        <td><?php echo htmlspecialchars($row['email']); ?></td>
-        <td><?php echo $row['contact']; ?></td>
-    </tr>
-    <?php endforeach; ?>
-</table>
-<?php else: ?>
-<p style="text-align:center;">No student records found.</p>
-<?php endif; ?>
-
-<div class="overlay" id="popupOverlay">
-    <div class="popup <?php echo $popupType; ?>">
-        <?php echo $message; ?>
-        <button class="close-btn" onclick="closePopup()">Close</button>
-    </div>
-</div>
 
 <script>
 function closePopup() {
