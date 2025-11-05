@@ -1,3 +1,4 @@
 ﻿# BEWARE OF ROIZ MATIC
 
-![App Preview](images/holiday_matic.png)
+![App Preview](image/holiday_matic.png)
+
